@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 		
 		// free array
 		free_array_2D(array, H);
-		free_array_2D(pooled_array, H);
+		free_array_2D(pooled_array, H/N);
 	}
 	return 0;
 }

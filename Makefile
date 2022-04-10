@@ -17,7 +17,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 
 program1 : $(OBJ_DIR)program1.o $(OBJS)
 	$(GCC) -o program1 $^
-program2 : $(OBJ_DIR)program2.o program1
+program2 : $(OBJ_DIR)program2.o $(OBJS)
 	$(GCC) -o program2 $^
 program3 : $(OBJ_DIR)program3.o $(OBJS)
 	$(GCC) -o program3 $^

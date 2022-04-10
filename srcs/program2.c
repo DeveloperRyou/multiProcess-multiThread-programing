@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 		free_array(pids);
 		free_array_2D(pipes, process_num);
 		free_array_2D(array, H);
-		free_array_2D(pooled_array, H);
+		free_array_2D(pooled_array, H/N);
 	}
 	return 0;
 }
