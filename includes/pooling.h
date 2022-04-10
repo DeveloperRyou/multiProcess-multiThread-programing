@@ -14,7 +14,7 @@ void stdout_array_st(int **array, int N, int W, int start, int max_width);
 
 // malloc_array.c
 int **malloc_array_2D(int H, int W);
-pid_t *malloc_array(int W);
+pid_t *malloc_array_pid(int W);
 void free_array_2D(int **array, int H);
 void free_array(int *array);
 
