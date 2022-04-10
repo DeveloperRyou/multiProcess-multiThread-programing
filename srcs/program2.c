@@ -92,7 +92,7 @@ int main(int argc, char **argv)
 			if (width == 0)
 				continue;
 			// open File ptr
-			FILE *fp = fdopen(pipes_output[process_index][1], "r");
+			FILE *fp = fdopen(pipes_input[process_index][0], "r");
 			pipein_array_st(fp, pooled_array, N, width, processed_node, W/N);
 			// close File ptr
 			fclose(fp);
