@@ -45,8 +45,8 @@ void stdout_array(int **array, int H, int W)
 void stdout_array_st(int **array, int N, int W, int start, int max_width)
 {
 	int y, x;
-	y = (start / N) * N;
-	x = (start % N) * N;
+	y = (start / (max_width / N)) * N;
+	x = (start % (max_width / N)) * N;
 	for (int i=0;i<N;i++)
 	{
 		for (int j=0;j<W;j++)

@@ -1,5 +1,4 @@
 #include "pooling.h"
-#include <stdlib.h>
 
 int main(int argc, char **argv)
 {
@@ -18,11 +17,17 @@ int main(int argc, char **argv)
 		pids = malloc_array_pid(process_num);
 
 		// set pipe array
-		int **pipes;
-		pipes = malloc_array_2D(process_num, 2);
+		int **pipes_input;
+		int **pipes_output;
+		pipes_input = malloc_array_2D(process_num, 2);
+		pipes_output = malloc_array_2D(process_num, 2);
 		for (int i=0;i<process_num;i++)
-			if (pipe(pipes[i]) == -1)
+		{
+			if (pipe(pipes_input[i]) == -1)
 				exit(1);
+			if (pipe(pipes_output[i]) == -1)
+				exit(1);
+		}
 
 		// make child process
 		for (int process_index=0;process_index<process_num;process_index++)
@@ -33,8 +38,8 @@ int main(int argc, char **argv)
 			else if (pids[process_index] == 0) // child process
 			{
 				// change standard io to pipe
-				dup2(pipes[process_index][0], STDIN_FILENO);
-				dup2(pipes[process_index][1], STDOUT_FILENO);
+				dup2(pipes_output[process_index][0], STDIN_FILENO);
+				dup2(pipes_input[process_index][1], STDOUT_FILENO);
 				execl("./program1", "./program1", argv[1], "childProcess"); // execute program 1
 				exit(1);
 			}
@@ -55,6 +60,12 @@ int main(int argc, char **argv)
 		int **pooled_array;
 		pooled_array = malloc_array_2D(H/N, W/N);
 
+		// save fd of standard io
+		int temp_stdin;
+		int temp_stdout;
+		dup2(STDIN_FILENO, temp_stdin);
+		dup2(STDOUT_FILENO, temp_stdout);
+
 		// set values to distribute
 		int process_node_size;
 		process_node_size = (H/N)*(W/N);
@@ -68,7 +79,7 @@ int main(int argc, char **argv)
 			int width;
 			width = (process_node_size - processed_node) / (process_num - process_index);
 			// change standard io to pipe
-			dup2(pipes[process_index][1], STDOUT_FILENO);
+			dup2(pipes_output[process_index][1], STDOUT_FILENO);
 			stdout_info(N, width * N, N);
 			stdout_array_st(array, N, width * N, processed_node, W); // if width == 0, child process will finish
 			processed_node += width;
@@ -84,21 +95,31 @@ int main(int argc, char **argv)
 			if (width == 0)
 				continue;
 			// change standard io to pipe
-			dup2(pipes[process_index][0], STDIN_FILENO);
+			dup2(pipes_input[process_index][0], STDIN_FILENO);
 			stdin_arrayline_st(pooled_array, N, width, processed_node, W/N);
 			processed_node += width;
 		}
 
 		// output array after pooling
-		dup2(0, STDIN_FILENO);
-		dup2(1, STDOUT_FILENO);
+		dup2(temp_stdin, STDIN_FILENO);
+		dup2(temp_stdout, STDOUT_FILENO);
 		end = clock();
 		stdout_time(start, end);
 		stdout_array(pooled_array, H/N, W/N);
 
+		// close fd
+		for (int i=0;i<process_num;i++)
+		{
+			close(pipes_input[i][0]);
+			close(pipes_input[i][1]);
+			close(pipes_output[i][0]);
+			close(pipes_output[i][1]);
+		}
+
 		// free array
 		free_array(pids);
-		free_array_2D(pipes, process_num);
+		free_array_2D(pipes_input, process_num);
+		free_array_2D(pipes_output, process_num);
 		free_array_2D(array, H);
 		free_array_2D(pooled_array, H/N);
 	}

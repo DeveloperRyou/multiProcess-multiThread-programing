@@ -3,6 +3,8 @@
 
 #include <time.h>
 #include <unistd.h>
+#include <stdlib.h>
+
 // io.c
 void stdin_info(int *H, int *W, int *N);
 void stdin_array(int **array, int H, int W);
