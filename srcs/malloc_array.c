@@ -1,0 +1,31 @@
+#include <stdlib.h>
+
+int **malloc_array_2D(int H, int W)
+{
+	int **array;
+
+	array = (int **)malloc(sizeof(int *) * H);
+	for (int i=0;i<H;i++)
+		array[i] = (int *)malloc(sizeof(int) * W);
+	return array;
+}
+
+int *malloc_array(int W)
+{
+	int *array;
+
+	array = (int *)malloc(sizeof(int) * W);
+	return array;
+}
+
+void free_array_2D(int **array, int H)
+{
+	for (int i=0;i<H;i++)
+		free(array[i]);
+	free(array);
+}
+
+void free_array(int *array)
+{
+	free(array);
+}
