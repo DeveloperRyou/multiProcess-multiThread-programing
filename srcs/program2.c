@@ -1,6 +1,5 @@
 #include "pooling.h"
 #include <stdlib.h>
-#include <unistd.h>
 
 int main(int argc, char **argv)
 {
@@ -16,7 +15,7 @@ int main(int argc, char **argv)
 
 		// set process array
 		pid_t *pids;
-		pids = malloc_array(process_num);
+		pids = malloc_array_pid(process_num);
 
 		// set pipe array
 		int **pipes;

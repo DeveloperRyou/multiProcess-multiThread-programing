@@ -2,6 +2,7 @@
 # define POOLING_H
 
 #include <time.h>
+#include <unistd.h>
 // io.c
 void stdin_info(int *H, int *W, int *N);
 void stdin_array(int **array, int H, int W);
@@ -13,7 +14,7 @@ void stdout_array_st(int **array, int N, int W, int start, int max_width);
 
 // malloc_array.c
 int **malloc_array_2D(int H, int W);
-int *malloc_array(int W);
+pid_t *malloc_array(int W);
 void free_array_2D(int **array, int H);
 void free_array(int *array);
 

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <unistd.h>
 
 int **malloc_array_2D(int H, int W)
 {
@@ -10,11 +11,11 @@ int **malloc_array_2D(int H, int W)
 	return array;
 }
 
-int *malloc_array(int W)
+pid_t *malloc_array_pid(int W)
 {
-	int *array;
+	pid_t *array;
 
-	array = (int *)malloc(sizeof(int) * W);
+	array = (pid_t *)malloc(sizeof(pid_t) * W);
 	return array;
 }
 
