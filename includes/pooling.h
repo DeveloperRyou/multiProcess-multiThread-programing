@@ -4,15 +4,16 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 // io.c
 void stdin_info(int *H, int *W, int *N);
 void stdin_array(int **array, int H, int W);
-void stdin_arrayline_st(int **array, int N, int W, int start, int max_width);
+void pipein_array_st(FILE *fp, int **array, int N, int W, int start, int max_width);
 void stdout_time(clock_t start, clock_t end);
-void stdout_info(int H, int W, int N);
 void stdout_array(int **array, int H, int W);
-void stdout_array_st(int **array, int N, int W, int start, int max_width);
+void pipeout_info(FILE *fp, int H, int W, int N);
+void pipeout_array_st(FILE *fp, int **array, int N, int W, int start, int max_width);
 
 // malloc_array.c
 int **malloc_array_2D(int H, int W);
