@@ -19,7 +19,7 @@ void stdin_array_st(int **array, int N, int W, int start, int max_width)
 	y = start / (max_width / N);
 	x = start % (max_width / N);
 	for (int i=0;i<W;i++)
-		scanf("%d ", &array[y + (x + i) / max_width][(x + i) % max_width]);
+		scanf("%d", &array[y + (x + i) / max_width][(x + i) % max_width]);
 }
 
 void stdout_time(clock_t start, clock_t end)
