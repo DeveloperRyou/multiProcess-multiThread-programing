@@ -23,10 +23,11 @@ int main(int argc, char **argv)
 		pipes_output = malloc_array_2D(process_num, 2);
 		for (int i=0;i<process_num;i++)
 		{
-			if (pipe(pipes_input[i]) == -1)
+			if (pipe(pipes_input[i]) == -1 || pipe(pipes_output[i]) == -1)
+			{
+				printf("[ERROR] : Pipe Error\n");
 				exit(1);
-			if (pipe(pipes_output[i]) == -1)
-				exit(1);
+			}
 		}
 
 		// make child process
@@ -34,13 +35,17 @@ int main(int argc, char **argv)
 		{
 			pids[process_index] = fork();
 			if (pids[process_index] < 0)
-				return -1;
+			{
+				printf("[ERROR] : Process Error\n");
+				exit(1);
+			}
 			else if (pids[process_index] == 0) // child process
 			{
 				// change standard io to pipe
 				dup2(pipes_output[process_index][0], STDIN_FILENO);
 				dup2(pipes_input[process_index][1], STDOUT_FILENO);
 				execl("./program1", "./program1", argv[1], "childProcess", 0); // execute program 1
+				printf("[ERROR] : Execute Error\n");
 				exit(1);
 			}
 		}
