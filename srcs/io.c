@@ -15,9 +15,10 @@ void stdin_array(int **array, int H, int W)
 
 void stdin_array_st(int **array, int N, int W, int start, int max_width)
 {
+	// scan linear array -> array 2D
 	int y, x;
-	y = start / (max_width / N);
-	x = start % (max_width / N);
+	y = start / max_width;
+	x = start % max_width;
 	for (int i=0;i<W;i++)
 		scanf("%d", &array[y + (x + i) / max_width][(x + i) % max_width]);
 }
@@ -44,13 +45,14 @@ void stdout_info(int H, int W, int N)
 
 void stdout_array_st(int **array, int N, int W, int start, int max_width)
 {
+	// print array 2D -> linear array
 	int y, x;
 	y = (start / (max_width / N)) * N;
 	x = (start % (max_width / N)) * N;
 	for (int i=0;i<N;i++)
 	{
 		for (int j=0;j<W;j++)
-			printf("%d ", array[y + i + (x + j) / max_width][(x + j) % max_width]);
+			printf("%d ", array[y + i + ((x + j) / max_width) * N][(x + j) % max_width]);
 		printf("\n");
 	}
 }

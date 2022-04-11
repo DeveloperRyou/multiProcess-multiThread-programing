@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 				// change standard io to pipe
 				dup2(pipes_output[process_index][0], STDIN_FILENO);
 				dup2(pipes_input[process_index][1], STDOUT_FILENO);
-				execl("./program1", "./program1", argv[1], "childProcess"); // execute program 1
+				execl("./program1", "./program1", argv[1], "childProcess", 0); // execute program 1
 				exit(1);
 			}
 		}
@@ -80,6 +80,7 @@ int main(int argc, char **argv)
 			dup2(pipes_output[process_index][1], STDOUT_FILENO);
 			stdout_info(N, width * N, N);
 			stdout_array_st(array, N, width * N, processed_node, W); // if width == 0, child process will finish
+			fflush(stdout);
 			processed_node += width;
 		}
 
