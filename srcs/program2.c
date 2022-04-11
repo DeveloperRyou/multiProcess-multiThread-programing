@@ -64,6 +64,10 @@ int main(int argc, char **argv)
 		int process_node_size;
 		process_node_size = (H/N)*(W/N);
 
+		// save standard io
+		int temp_stdin = dup(STDIN_FILENO);
+		int temp_stdout = dup(STDOUT_FILENO);
+		
 		// send data to child process
 		int processed_node;
 		processed_node = 0;
@@ -95,6 +99,8 @@ int main(int argc, char **argv)
 		}
 
 		// output array after pooling
+		dup2(temp_stdin, STDIN_FILENO);
+		dup2(temp_stdout, STDOUT_FILENO);
 		end = clock();
 		stdout_time(start, end);
 		stdout_array(pooled_array, H/N, W/N);

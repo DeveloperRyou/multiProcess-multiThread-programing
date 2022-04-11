@@ -10,7 +10,7 @@ void stdin_array(int **array, int H, int W)
 {
 	for (int i=0;i<H;i++)
 		for (int j=0;j<W;j++)
-			scanf("%d ", &array[i][j]);
+			scanf("%d", &array[i][j]);
 }
 
 void stdin_array_st(int **array, int N, int W, int start, int max_width)
