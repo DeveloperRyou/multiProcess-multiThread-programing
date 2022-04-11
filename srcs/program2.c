@@ -72,13 +72,10 @@ int main(int argc, char **argv)
 			// set width of array to process in current process
 			int width;
 			width = (process_node_size - processed_node) / (process_num - process_index);
-			// open File ptr
-			FILE *fp = fdopen(pipes_output[process_index][1], "w");
-			pipeout_info(fp, N, width * N, N);
-			// if width == 0, child process will finish
-			pipeout_array_st(fp, array, N, width * N, processed_node, W);
-			// close File ptr
-			fclose(fp);
+			// change standard io to pipe
+			dup2(pipes_output[process_index][1], STDOUT_FILENO);
+			stdout_info(N, width * N, N);
+			stdout_array_st(array, N, width * N, processed_node, W); // if width == 0, child process will finish
 			processed_node += width;
 		}
 
@@ -91,11 +88,9 @@ int main(int argc, char **argv)
 			width = (process_node_size - processed_node) / (process_num - process_index);
 			if (width == 0)
 				continue;
-			// open File ptr
-			FILE *fp = fdopen(pipes_input[process_index][0], "r");
-			pipein_array_st(fp, pooled_array, N, width, processed_node, W/N);
-			// close File ptr
-			fclose(fp);
+			// change standard io to pipe
+			dup2(pipes_input[process_index][0], STDIN_FILENO);
+			stdin_array_st(pooled_array, N, width, processed_node, W/N);
 			processed_node += width;
 		}
 
