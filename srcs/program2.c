@@ -4,13 +4,30 @@ int main(int argc, char **argv)
 {
 	if (argc == 3)
 	{
-		// set clock
+		/** Standard input **/
+		// input infomation from standard
+		int H, W, N;
+		stdin_info(&H, &W, &N);
+		if (H == 0 || W == 0 || N == 0)
+			return 0;
+		
+		// malloc memory to store array
+		int **array;
+		array = malloc_array_2D(H, W);
+
+		// input array from standard
+		stdin_array(array, H, W);
+
+		// set clock after stdin
 		clock_t start, end;
 		start = clock();
 
+		/** Make Processes **/
 		// set process number
 		int process_num;
 		process_num = atoi(argv[2]);
+		if (process_num <= 0)
+			return 0;
 
 		// set process array
 		pid_t *pids;
@@ -50,17 +67,7 @@ int main(int argc, char **argv)
 			}
 		}
 
-		// input infomation from standard
-		int H, W, N;
-		stdin_info(&H, &W, &N);
-
-		// malloc memory to store array
-		int **array;
-		array = malloc_array_2D(H, W);
-
-		// input array from standard
-		stdin_array(array, H, W);
-
+		/** Process Data **/
 		// malloc memory to store array after pooling
 		int **pooled_array;
 		pooled_array = malloc_array_2D(H/N, W/N);
@@ -104,6 +111,7 @@ int main(int argc, char **argv)
 			processed_node += width;
 		}
 
+		/** Standard ouput **/
 		// output array after pooling
 		dup2(temp_stdin, STDIN_FILENO);
 		dup2(temp_stdout, STDOUT_FILENO);

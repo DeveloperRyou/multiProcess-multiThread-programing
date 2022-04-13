@@ -22,13 +22,7 @@ int main(int argc, char **argv)
 	// called from shell or process
 	if (argc == 3)
 	{
-		// set clock
-		clock_t start, end;
-		start = clock();
-
-		// set type
-		type = argv[1];
-
+		/** Standard input **/
 		// input infomation from standard
 		stdin_info(&H, &W, &N);
 		if (H == 0 || W == 0 || N == 0)
@@ -39,6 +33,14 @@ int main(int argc, char **argv)
 
 		// input array from standard
 		stdin_array(array, H, W);
+		
+		// set clock
+		clock_t start, end;
+		start = clock();
+
+		/** Make Threads **/
+		// set type
+		type = argv[1];
 
 		// malloc memory to store array after pooling
 		pooled_array = malloc_array_2D(H/N, W/N);
@@ -46,6 +48,8 @@ int main(int argc, char **argv)
 		// set thread number
 		int thread_num;
 		thread_num = atoi(argv[2]);
+		if (thread_num <= 0)
+			return 0;
 
 		// set thread array
 		pthread_t *pthreads;
@@ -82,6 +86,7 @@ int main(int argc, char **argv)
 			pthread_join(pthreads[thread_index], res);
 		}
 
+		/** Standard output **/
 		// output array after pooling
 		end = clock();
 		stdout_time(start, end);
