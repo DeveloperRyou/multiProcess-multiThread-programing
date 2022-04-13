@@ -12,14 +12,14 @@ OBJS = $(addprefix $(OBJ_DIR), $(O))
 GCC = gcc -I$(INCLUDE_DIR)
 RM = rm -rf
 
-$(NAME) : program1 program2 program3
+all : $(NAME)
 
 program1 : $(OBJ_DIR)program1.o $(OBJS)
 	$(GCC) -o program1 $^
 program2 : $(OBJ_DIR)program2.o $(OBJS)
 	$(GCC) -o program2 $^
 program3 : $(OBJ_DIR)program3.o $(OBJS)
-	$(GCC) -o program3 $^
+	$(GCC) -lpthread -o program3 $^
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(GCC) -c $< -o $@
@@ -27,8 +27,6 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 .PHONY : re all clean test test-clean test-fclean
 
 re : clean all
-
-all : $(NAME)
 
 clean : 
 	$(RM) $(OBJS)

@@ -10,8 +10,8 @@ static char *type;
 // thread function
 void* thread_excute(void *thread_argv)
 {
-	int width = (int *)thread_argv[0];
-	int processed_node = (int *)thread_argv[1];
+	int width = ((int *)thread_argv)[0];
+	int processed_node = ((int *)thread_argv)[1];
 
 	// do pooling in thread
 	pooling_thread(pooled_array, array, N, width, processed_node, W/N, type);
@@ -77,7 +77,10 @@ int main(int argc, char **argv)
 
 		// wait for thread until finished
 		for (int thread_index=0;thread_index<thread_num;thread_index++)
-			pthread_join(pthreads[thread_index], void);
+		{
+			void **res;
+			pthread_join(pthreads[thread_index], res);
+		}
 
 		// output array after pooling
 		end = clock();
