@@ -41,7 +41,7 @@ testfiles : ./tests/test.c ./tests/testfiles.sh
 	$(GCC) ./tests/test.c -o ./tests/test
 	sh ./tests/testfiles.sh
 test-clean : 
-	find ./tests/ -name "test_*" ! -name "*output" -delete
+	find ./tests/ -name "*output" -delete
 test-fclean : 
 	$(RM) ./tests/test
 	$(RM) ./tests/test_*
