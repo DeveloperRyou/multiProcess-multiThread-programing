@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 		{
 			if (pipe(pipes_input[i]) == -1 || pipe(pipes_output[i]) == -1)
 			{
-				printf("[ERROR] : Pipe Error\n");
+				printf("[ERROR] : Pipe Create Error\n");
 				exit(1);
 			}
 		}
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 			pids[process_index] = fork();
 			if (pids[process_index] < 0)
 			{
-				printf("[ERROR] : Process Error\n");
+				printf("[ERROR] : Process Create Error\n");
 				exit(1);
 			}
 			else if (pids[process_index] == 0) // child process

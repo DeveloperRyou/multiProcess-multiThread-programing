@@ -19,6 +19,14 @@ pid_t *malloc_array_pid(int W)
 	return array;
 }
 
+pthread_t *malloc_array_pthread(int W)
+{
+	pthread_t *array;
+
+	array = (pthread_t *)malloc(sizeof(pthread_t) * W);
+	return array;
+}
+
 void free_array_2D(int **array, int H)
 {
 	for (int i=0;i<H;i++)

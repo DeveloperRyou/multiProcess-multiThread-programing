@@ -12,8 +12,7 @@ OBJS = $(addprefix $(OBJ_DIR), $(O))
 GCC = gcc -I$(INCLUDE_DIR)
 RM = rm -rf
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	$(GCC) -c $< -o $@
+$(NAME) : program1 program2 program3
 
 program1 : $(OBJ_DIR)program1.o $(OBJS)
 	$(GCC) -o program1 $^
@@ -22,7 +21,12 @@ program2 : $(OBJ_DIR)program2.o $(OBJS)
 program3 : $(OBJ_DIR)program3.o $(OBJS)
 	$(GCC) -o program3 $^
 
-.PHONY : all clean test test-clean
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	$(GCC) -c $< -o $@
+
+.PHONY : re all clean test test-clean test-fclean
+
+re : clean all
 
 all : $(NAME)
 
@@ -34,7 +38,12 @@ clean :
 	$(RM) $(NAME)
 
 test : ./tests/test.c
-	$(GCC) ./tests/test.c -o test
-	
+	$(GCC) ./tests/test.c -o ./tests/test
+	sh ./tests/test.sh
+
 test-clean : 
-	$(RM) test
+	find ./tests/ -name "test_*" ! -name "*output" -delete
+
+test-fclean : 
+	$(RM) ./tests/test
+	$(RM) ./tests/test_*

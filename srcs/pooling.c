@@ -54,3 +54,21 @@ void pooling(int **pooled_array, int **array, int y, int x, int N, char *type)
 		}
 	}
 }
+
+void pooling_thread(int **pooled_array, int **array, int N, int W, int start, int max_width, char *type)
+{
+	for (int i=0;i<W;i++)
+	{
+		int x, y;
+		x = (start + i) % max_width;
+		y = (start + i) / max_width;
+		if (strcmp("avg", type) == 0) // avg pooling
+			pooled_array[y][x] = pooling_avg(array, y, x, N);
+		else if (strcmp("min", type) == 0) // min pooling
+			pooled_array[y][x] = pooling_min(array, y, x, N);
+		else if (strcmp("max", type) == 0) // max pooling
+			pooled_array[y][x] = pooling_max(array, y, x, N);
+		else // exception handing
+			pooled_array[y][x] = 0;
+	}
+}
