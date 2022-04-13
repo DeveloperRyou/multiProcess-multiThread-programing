@@ -35,13 +35,13 @@ clean :
 	$(RM) $(OBJ_DIR)program3.o
 	$(RM) $(NAME)
 
-test : ./tests/test.c
+test : ./tests/test.c ./tests/test.sh
 	$(GCC) ./tests/test.c -o ./tests/test
 	sh ./tests/test.sh
-
+testfiles : ./tests/testfiles.sh
+	sh ./tests/testfiles.sh
 test-clean : 
 	find ./tests/ -name "test_*" ! -name "*output" -delete
-
 test-fclean : 
 	$(RM) ./tests/test
 	$(RM) ./tests/test_*
