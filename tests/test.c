@@ -15,11 +15,11 @@ int main(int argc, char **argv)
 		int num;
 		for (int i=0;i<H;i++)
 		{
-			num = rand();
+			num = rand() % 10000;
 			printf("%d", num);
 			for (int j=1;j<W;j++)
 			{
-				num = rand();
+				num = rand() % 10000;
 				printf(" %d", num);
 			}
 			printf("\n");

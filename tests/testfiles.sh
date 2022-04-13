@@ -1,5 +1,5 @@
-# 50 files fix N
-for var in {500..25000..500}
+# 40 files fix N
+for var in {500..20000..500}
 do
 	file=./tests/test_fix_N_$(printf "%.5d" $var)
 	./tests/test $var $var 10 > $file

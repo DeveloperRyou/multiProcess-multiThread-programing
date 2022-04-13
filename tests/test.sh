@@ -1,4 +1,4 @@
-# test many size (50)
+# test many size (40)
 for file in $(ls ./tests/ | grep test_fix_N_)
 do
 	echo "Test "$file
@@ -16,8 +16,8 @@ do
 	./program2 avg 4 < ./tests/$file | head -1 | tr '\n' '\t' >> ./tests/test_fix_size_output
 	./program3 avg 4 < ./tests/$file | head -1 >> ./tests/test_fix_size_output
 done
-# test many process (50)
-for process in {1..50..1}
+# test many process (40)
+for process in {1..40..1}
 do
 	file=test_fix_Nsize
 	echo "Test "$file"_"$process
