@@ -24,7 +24,7 @@ program3 : $(OBJ_DIR)program3.o $(OBJS)
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(GCC) -c $< -o $@
 
-.PHONY : re all clean test test-clean test-fclean
+.PHONY : re all clean test testfiles test-clean test-fclean
 
 re : clean all
 
@@ -35,10 +35,10 @@ clean :
 	$(RM) $(OBJ_DIR)program3.o
 	$(RM) $(NAME)
 
-test : ./tests/test.c ./tests/test.sh
-	$(GCC) ./tests/test.c -o ./tests/test
+test : all ./tests/test.sh
 	sh ./tests/test.sh
-testfiles : ./tests/testfiles.sh
+testfiles : ./tests/test.c ./tests/testfiles.sh 
+	$(GCC) ./tests/test.c -o ./tests/test
 	sh ./tests/testfiles.sh
 test-clean : 
 	find ./tests/ -name "test_*" ! -name "*output" -delete
