@@ -2,14 +2,14 @@
 
 int pooling_avg(int **array, int y, int x, int N)
 {
-	int avg;
+	long long avg;
 
 	avg = 0;
 	for (int i=0;i<N;i++)
 		for (int j=0;j<N;j++)
 			avg += array[y*N + i][x*N + j];
 	avg = avg/(N*N);
-	return avg;
+	return (int)avg;
 }
 
 int pooling_min(int **array, int y, int x, int N)
