@@ -4,24 +4,6 @@ int main(int argc, char **argv)
 {
 	if (argc == 3)
 	{
-		/** Standard input **/
-		// input infomation from standard
-		int H, W, N;
-		stdin_info(&H, &W, &N);
-		if (H == 0 || W == 0 || N == 0)
-			return 0;
-		
-		// malloc memory to store array
-		int **array;
-		array = malloc_array_2D(H, W);
-
-		// input array from standard
-		stdin_array(array, H, W);
-
-		// set clock after stdin
-		clock_t start, end;
-		start = clock();
-
 		/** Make Processes **/
 		// set process number
 		int process_num;
@@ -67,6 +49,24 @@ int main(int argc, char **argv)
 			}
 		}
 
+		/** Standard input **/
+		// input infomation from standard
+		int H, W, N;
+		stdin_info(&H, &W, &N);
+		if (H == 0 || W == 0 || N == 0)
+			return 0;
+		
+		// malloc memory to store array
+		int **array;
+		array = malloc_array_2D(H, W);
+
+		// input array from standard
+		stdin_array(array, H, W);
+
+		// set clock after stdin
+		clock_t start, end;
+		start = clock();
+		
 		/** Process Data **/
 		// malloc memory to store array after pooling
 		int **pooled_array;

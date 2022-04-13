@@ -33,10 +33,6 @@ int main(int argc, char **argv)
 
 		// input array from standard
 		stdin_array(array, H, W);
-		
-		// set clock
-		clock_t start, end;
-		start = clock();
 
 		/** Make Threads **/
 		// set type
@@ -63,6 +59,10 @@ int main(int argc, char **argv)
 		int process_node_size;
 		process_node_size = (H/N)*(W/N);
 
+		// set clock
+		clock_t start, end;
+		start = clock();
+		
 		// make thread and send argument to thread
 		int processed_node;
 		processed_node = 0;
