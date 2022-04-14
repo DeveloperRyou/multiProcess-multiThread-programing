@@ -11,7 +11,7 @@ static char *type;
 void* thread_excute(void *thread_argv)
 {
 	int start_idx = ((int *)thread_argv)[0];
-	int height = ((int *)thread_argv)[0];
+	int height = ((int *)thread_argv)[1];
 
 	// do pooling in thread
 	pooling_thread(pooled_array, array, start_idx, height, W/N, N, type);
