@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 		}
 
 		// input array from standard
-		stdin_array(array, H, W);
+		stdin_array(array, 0, H, W);
 		
 		/** Process Data **/
 		// malloc memory to store array after pooling
@@ -92,43 +92,36 @@ int main(int argc, char **argv)
 		clock_t start, end;
 		start = clock();
 
-		// set values to distribute
-		int process_node_size;
-		process_node_size = (H/N)*(W/N);
-
 		// save standard io
 		int temp_stdin = dup(STDIN_FILENO);
 		int temp_stdout = dup(STDOUT_FILENO);
 
 		// send data to child process
-		int processed_node;
-		processed_node = 0;
+		int processed_line = 0;
 		for (int process_index=0;process_index<process_num;process_index++)
 		{
 			// set width of array to process in current process
-			int width;
-			width = (process_node_size - processed_node) / (process_num - process_index);
+			int height = (H/N - processed_line) / (thread_num - thread_index);
 			// change standard io to pipe
 			dup2(pipes_output[process_index][1], STDOUT_FILENO);
-			stdout_info(N, width * N, N);
-			stdout_array_st(array, N, width * N, processed_node, W); // if width == 0, child process will finish
+			stdout_info(processed_line, height, N);
+			stdout_array(array, processed_line*N, height*N, W); // if height == 0, child process will finish
 			fflush(stdout);
-			processed_node += width;
+			processed_line += height;
 		}
 
 		// receive data to child process
-		processed_node = 0;
+		processed_line = 0;
 		for (int process_index=0;process_index<process_num;process_index++)
 		{
 			// set width of array
-			int width;
-			width = (process_node_size - processed_node) / (process_num - process_index);
-			if (width == 0)
+			int height = (H/N - processed_line) / (thread_num - thread_index);
+			if (height == 0)
 				continue;
 			// change standard io to pipe
 			dup2(pipes_input[process_index][0], STDIN_FILENO);
-			stdin_array_st(pooled_array, N, width, processed_node, W/N);
-			processed_node += width;
+			stdin_array(pooled_array, processed_line, height, W/N);
+			processed_node += height;
 		}
 
 		/** Standard ouput **/
@@ -137,7 +130,7 @@ int main(int argc, char **argv)
 		dup2(temp_stdout, STDOUT_FILENO);
 		end = clock();
 		stdout_time(start, end);
-		stdout_array(pooled_array, H/N, W/N);
+		stdout_array(pooled_array, 0, H/N, W/N);
 
 		// close fd
 		for (int i=0;i<process_num;i++)

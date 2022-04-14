@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		}
 
 		// input array from standard
-		stdin_array(array, H, W);
+		stdin_array(array, 0, H, W);
 
 		/** Process Data **/
 		// malloc memory to store array after pooling
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 			end = clock();
 			stdout_time(start, end);
 		}
-		stdout_array(pooled_array, H/N, W/N);
+		stdout_array(pooled_array, 0, H/N, W/N);
 		
 		// free array
 		free_array_2D(array, H);

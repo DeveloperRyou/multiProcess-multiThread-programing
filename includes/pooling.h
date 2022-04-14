@@ -10,12 +10,10 @@
 
 // io.c
 void stdin_info(int *H, int *W, int *N);
-void stdin_array(int **array, int H, int W);
-void stdin_array_st(int **array, int N, int W, int start, int max_width);
+void stdin_array(int **array, int start, int H, int W);
 void stdout_time(clock_t start, clock_t end);
-void stdout_array(int **array, int H, int W);
+void stdout_array(int **array, int start, int H, int W);
 void stdout_info(int H, int W, int N);
-void stdout_array_st(int **array, int N, int W, int start, int max_width);
 
 // malloc_array.c
 int **malloc_array_2D(int H, int W);
