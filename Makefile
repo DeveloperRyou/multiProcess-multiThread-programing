@@ -19,7 +19,7 @@ program1 : $(OBJ_DIR)program1.o $(OBJS)
 program2 : $(OBJ_DIR)program2.o $(OBJS)
 	$(GCC) -o program2 $^
 program3 : $(OBJ_DIR)program3.o $(OBJS)
-	$(GCC) -lpthread -o program3 $^
+	$(GCC) -o program3 $^ -lpthread 
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(GCC) -c $< -o $@

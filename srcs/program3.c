@@ -10,6 +10,7 @@ static char *type;
 // thread function
 void* thread_excute(void *thread_argv)
 {
+	printf("Thread num : %d\n", pthread_self());
 	int width = ((int *)thread_argv)[0];
 	int processed_node = ((int *)thread_argv)[1];
 
