@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 		for (int process_index=0;process_index<process_num;process_index++)
 		{
 			// set width of array to process in current process
-			int height = (H/N - processed_line) / (thread_num - thread_index);
+			int height = (H/N - processed_line) / (process_num - process_index);
 			// change standard io to pipe
 			dup2(pipes_output[process_index][1], STDOUT_FILENO);
 			stdout_info(processed_line, height, N);
@@ -115,7 +115,7 @@ int main(int argc, char **argv)
 		for (int process_index=0;process_index<process_num;process_index++)
 		{
 			// set width of array
-			int height = (H/N - processed_line) / (thread_num - thread_index);
+			int height = (H/N - processed_line) / (process_num - process_index);
 			if (height == 0)
 				continue;
 			// change standard io to pipe
