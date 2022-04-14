@@ -4,6 +4,10 @@ int main(int argc, char **argv)
 {
 	if (argc == 3)
 	{
+		// set clock
+		clock_t start, end;
+		start = clock();
+
 		/** Make Processes **/
 		// set process number
 		int process_num;
@@ -62,10 +66,6 @@ int main(int argc, char **argv)
 
 		// input array from standard
 		stdin_array(array, H, W);
-
-		// set clock after stdin
-		clock_t start, end;
-		start = clock();
 		
 		/** Process Data **/
 		// malloc memory to store array after pooling

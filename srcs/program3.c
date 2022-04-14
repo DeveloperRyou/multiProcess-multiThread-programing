@@ -21,7 +21,11 @@ int main(int argc, char **argv)
 {
 	// called from shell or process
 	if (argc == 3)
-	{
+	{		
+		// set clock
+		clock_t start, end;
+		start = clock();
+		
 		/** Standard input **/
 		// input infomation from standard
 		stdin_info(&H, &W, &N);
@@ -58,10 +62,6 @@ int main(int argc, char **argv)
 		// set values to distribute
 		int process_node_size;
 		process_node_size = (H/N)*(W/N);
-
-		// set clock
-		clock_t start, end;
-		start = clock();
 		
 		// make thread and send argument to thread
 		int processed_node;

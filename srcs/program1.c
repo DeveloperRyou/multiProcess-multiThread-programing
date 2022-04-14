@@ -5,6 +5,11 @@ int main(int argc, char **argv)
 	// called from shell or process
 	if (argc == 2 || argc == 3)
 	{
+		// set clock after stdin
+		clock_t start, end;
+		if (argc == 2)
+			start = clock();
+		
 		/** Standard input **/
 		// input infomation from standard
 		int H, W, N;
@@ -18,11 +23,6 @@ int main(int argc, char **argv)
 	
 		// input array from standard
 		stdin_array(array, H, W);
-
-		// set clock after stdin
-		clock_t start, end;
-		if (argc == 2)
-			start = clock();
 
 		/** Process Data **/
 		// malloc memory to store array after pooling
