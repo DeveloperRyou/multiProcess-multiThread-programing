@@ -78,10 +78,7 @@ int main(int argc, char **argv)
 
 		// wait for thread until finished
 		for (int thread_index=0;thread_index<thread_num;thread_index++)
-		{
-			void **res;
-			pthread_join(pthreads[thread_index], res);
-		}
+			pthread_join(pthreads[thread_index], 0);
 
 		/** Standard output **/
 		// output array after pooling
