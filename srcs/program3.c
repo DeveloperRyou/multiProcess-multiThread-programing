@@ -10,11 +10,11 @@ static char *type;
 // thread function
 void* thread_excute(void *thread_argv)
 {
-	int width = ((int *)thread_argv)[0];
-	int processed_node = ((int *)thread_argv)[1];
+	int start_idx = ((int *)thread_argv)[0];
+	int height = ((int *)thread_argv)[0];
 
 	// do pooling in thread
-	pooling_thread(pooled_array, array, N, width, processed_node, W/N, type);
+	pooling_thread(pooled_array, array, start_idx, height, W/N, N, type);
 }
 
 int main(int argc, char **argv)
@@ -54,29 +54,24 @@ int main(int argc, char **argv)
 		// malloc argument to pass to thread
 		int **thread_argv;
 		thread_argv = malloc_array_2D(thread_num, 2);
-
-		// set values to distribute
-		int process_node_size;
-		process_node_size = (H/N)*(W/N);
 			
 		// set clock after stdin
 		clock_t start, end;
 		start = clock();
 		
 		// make thread and send argument to thread
-		int processed_node;
-		processed_node = 0;
+		int processed_line = 0;
 		for (int thread_index=0;thread_index<thread_num;thread_index++)
 		{
 			// set width and processed_node of array to process in current thread
-			thread_argv[thread_index][0] = (process_node_size - processed_node) / (thread_num - thread_index);
-			thread_argv[thread_index][1] = processed_node;
+			thread_argv[thread_index][0] = processed_line;
+			thread_argv[thread_index][1] = (H/N - processed_line) / (thread_num - thread_index);
 			if (pthread_create(&pthreads[thread_index], 0, thread_excute, (void *)thread_argv[thread_index]) < 0)
 			{
 				printf("[ERROR] : Thread Create Error\n");
 				exit(1);
 			}
-			processed_node += thread_argv[thread_index][0];
+			processed_line += thread_argv[thread_index][1];
 		}
 
 		// wait for thread until finished
