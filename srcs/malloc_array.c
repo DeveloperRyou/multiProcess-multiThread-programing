@@ -34,7 +34,7 @@ void free_array_2D(int **array, int H)
 	free(array);
 }
 
-void free_array(int *array)
+void free_array(void *array)
 {
 	free(array);
 }
