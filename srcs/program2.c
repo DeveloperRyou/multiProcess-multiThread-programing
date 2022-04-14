@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 			// change standard io to pipe
 			dup2(pipes_input[process_index][0], STDIN_FILENO);
 			stdin_array(pooled_array, processed_line, height, W/N);
-			processed_node += height;
+			processed_line += height;
 		}
 
 		/** Standard ouput **/
