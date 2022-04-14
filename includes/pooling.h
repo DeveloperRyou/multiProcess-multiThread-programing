@@ -25,7 +25,6 @@ void free_array_2D(int **array, int H);
 void free_array(void *array);
 
 // pooling.c
-void pooling(int **pooled_array, int **array, int y, int x, int N, char *type);
-void pooling_thread(int **pooled_array, int **array, int start, int y, int x, int N, char *type);
+void pooling(int **pooled_array, int **array, int start, int y, int x, int N, char *type);
 
 #endif

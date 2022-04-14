@@ -14,12 +14,22 @@ int main(int argc, char **argv)
 		// set process array
 		pid_t *pids;
 		pids = malloc_array_pid(process_num);
+		if (pids == 0)
+		{
+			printf("[ERROR] : Pids Malloc Error\n");
+			exit(1);
+		}
 
 		// set pipe array
 		int **pipes_input;
 		int **pipes_output;
 		pipes_input = malloc_array_2D(process_num, 2);
 		pipes_output = malloc_array_2D(process_num, 2);
+		if (pipes_input == 0 || pipes_output == 0)
+		{
+			printf("[ERROR] : Pipes Malloc Error\n");
+			exit(1);
+		}
 		for (int i=0;i<process_num;i++)
 		{
 			if (pipe(pipes_input[i]) == -1 || pipe(pipes_output[i]) == -1)
@@ -59,6 +69,11 @@ int main(int argc, char **argv)
 		// malloc memory to store array
 		int **array;
 		array = malloc_array_2D(H, W);
+		if (array == 0)
+		{
+			printf("[ERROR] : Map Malloc Error\n");
+			exit(1);
+		}
 
 		// input array from standard
 		stdin_array(array, H, W);
@@ -67,6 +82,11 @@ int main(int argc, char **argv)
 		// malloc memory to store array after pooling
 		int **pooled_array;
 		pooled_array = malloc_array_2D(H/N, W/N);
+		if (array == 0)
+		{
+			printf("[ERROR] : Map Malloc Error\n");
+			exit(1);
+		}
 		
 		// set clock after stdin
 		clock_t start, end;

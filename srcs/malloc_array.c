@@ -5,6 +5,8 @@ int **malloc_array_2D(int H, int W)
 	int **array;
 
 	array = (int **)malloc(sizeof(int *) * H);
+	if (array == 0)
+		return 0;
 	for (int i=0;i<H;i++)
 		array[i] = (int *)malloc(sizeof(int) * W);
 	return array;

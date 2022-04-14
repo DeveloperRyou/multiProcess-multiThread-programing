@@ -15,7 +15,7 @@ void* thread_excute(void *thread_argv)
 		return 0;
 
 	// do pooling in thread
-	pooling_thread(pooled_array, array, start, height, W/N, N, type);
+	pooling(pooled_array, array, start, height, W/N, N, type);
 	return 0;
 }
 
@@ -32,17 +32,24 @@ int main(int argc, char **argv)
 
 		// malloc memory to store array
 		array = malloc_array_2D(H, W);
+		if (array == 0)
+		{
+			printf("[ERROR] : Map Malloc Error\n");
+			exit(1);
+		}
 
 		// input array from standard
 		stdin_array(array, H, W);
 
-		/** Make Threads **/
-		// set type
-		type = argv[1];
-
 		// malloc memory to store array after pooling
 		pooled_array = malloc_array_2D(H/N, W/N);
+		if (array == 0)
+		{
+			printf("[ERROR] : Map Malloc Error\n");
+			exit(1);
+		}
 
+		/** Make Threads **/
 		// set thread number
 		int thread_num;
 		thread_num = atoi(argv[2]);
@@ -52,15 +59,28 @@ int main(int argc, char **argv)
 		// set thread array
 		pthread_t *pthreads;
 		pthreads = malloc_array_pthread(thread_num);
+		if (array == 0)
+		{
+			printf("[ERROR] : Pthreads Malloc Error\n");
+			exit(1);
+		}
 
 		// malloc argument to pass to thread
 		int **thread_argv;
 		thread_argv = malloc_array_2D(thread_num, 2);
+		if (array == 0)
+		{
+			printf("[ERROR] : Pthread_argv Malloc Error\n");
+			exit(1);
+		}
 			
 		// set clock after stdin
 		clock_t start, end;
 		start = clock();
 		
+		// set type
+		type = argv[1];
+
 		// make thread and send argument to thread
 		int processed_line = 0;
 		for (int thread_index=0;thread_index<thread_num;thread_index++)
@@ -68,7 +88,7 @@ int main(int argc, char **argv)
 			// set width and processed_node of array to process in current thread
 			thread_argv[thread_index][0] = processed_line;
 			thread_argv[thread_index][1] = (H/N - processed_line) / (thread_num - thread_index);
-			if (pthread_create(&pthreads[thread_index], 0, thread_excute, (void *)thread_argv[thread_index]) < 0)
+			if (pthread_create(&pthreads[thread_index], 0, thread_excute, (void *)thread_argv[thread_index]) != 0)
 			{
 				printf("[ERROR] : Thread Create Error\n");
 				exit(1);
@@ -78,7 +98,13 @@ int main(int argc, char **argv)
 
 		// wait for thread until finished
 		for (int thread_index=0;thread_index<thread_num;thread_index++)
-			pthread_join(pthreads[thread_index], 0);
+		{
+			if (pthread_join(pthreads[thread_index], 0) != 0)
+			{
+				printf("[ERROR] : Thread Join Error\n");
+				exit(1);
+			}
+		}
 
 		/** Standard output **/
 		// output array after pooling

@@ -37,25 +37,7 @@ int pooling_max(int **array, int y, int x, int N)
 
 }
 
-void pooling(int **pooled_array, int **array, int y, int x, int N, char *type)
-{
-	for (int i=0;i<y;i++)
-	{
-		for (int j=0;j<x;j++)
-		{
-			if (strcmp("avg", type) == 0) // avg pooling
-				pooled_array[i][j] = pooling_avg(array, i, j, N);
-			else if (strcmp("min", type) == 0) // min pooling
-				pooled_array[i][j] = pooling_min(array, i, j, N);
-			else if (strcmp("max", type) == 0) // max pooling
-				pooled_array[i][j] = pooling_max(array, i, j, N);
-			else // exception handing
-				pooled_array[i][j] = 0;
-		}
-	}
-}
-
-void pooling_thread(int **pooled_array, int **array, int start, int y, int x, int N, char *type)
+void pooling(int **pooled_array, int **array, int start, int y, int x, int N, char *type)
 {
 	for (int i=0;i<y;i++)
 	{

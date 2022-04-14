@@ -15,7 +15,12 @@ int main(int argc, char **argv)
 		// malloc memory to store array
 		int **array;
 		array = malloc_array_2D(H, W);
-	
+		if (array == 0)
+		{
+			printf("[ERROR] : Map Malloc Error\n");
+			exit(1);
+		}
+
 		// input array from standard
 		stdin_array(array, H, W);
 
@@ -23,6 +28,11 @@ int main(int argc, char **argv)
 		// malloc memory to store array after pooling
 		int **pooled_array;
 		pooled_array = malloc_array_2D(H/N, W/N);
+		if (pooled_array == 0)
+		{
+			printf("[ERROR] : Map Malloc Error\n");
+			exit(1);
+		}
 
 		// set clock after stdin
 		clock_t start, end;
@@ -30,7 +40,7 @@ int main(int argc, char **argv)
 			start = clock();
 		
 		// do pooling
-		pooling(pooled_array, array, H/N, W/N, N, argv[1]);
+		pooling(pooled_array, array, 0, H/N, W/N, N, argv[1]);
 		
 		/** Standard output **/
 		// output array after pooling
