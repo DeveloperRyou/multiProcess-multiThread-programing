@@ -20,7 +20,7 @@ int **malloc_array_2D(int H, int W);
 pid_t *malloc_array_pid(int W);
 pthread_t *malloc_array_pthread(int W);
 void free_array_2D(int **array, int H);
-void free_array(int *array);
+void free_array(void *array);
 
 // pooling.c
 void pooling(int **pooled_array, int **array, int y, int x, int N, char *type);

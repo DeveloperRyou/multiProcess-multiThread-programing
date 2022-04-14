@@ -9,7 +9,7 @@ O = $(C:.c=.o)
 SRCS = $(addprefix $(SRC_DIR), $(C))
 OBJS = $(addprefix $(OBJ_DIR), $(O))
 
-GCC = gcc -I$(INCLUDE_DIR) -Wno
+GCC = gcc -I$(INCLUDE_DIR)
 RM = rm -rf
 
 all : $(NAME)
