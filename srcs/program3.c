@@ -1,5 +1,4 @@
 #include "pooling.h"
-#include <pthread.h>
 
 // set global variable for thread (memory share)
 static int H, W, N;

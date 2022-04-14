@@ -2,10 +2,10 @@
 # define POOLING_H
 
 #include <time.h>
-#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <pthread.h>
 
 // io.c
