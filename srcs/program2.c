@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 			int height = (H/N - processed_line) / (process_num - process_index);
 			// change standard io to pipe
 			dup2(pipes_output[process_index][1], STDOUT_FILENO);
-			stdout_info(processed_line, height, N);
+			stdout_info(height*N, W, N);
 			stdout_array(array, processed_line*N, height*N, W); // if height == 0, child process will finish
 			fflush(stdout);
 			processed_line += height;
