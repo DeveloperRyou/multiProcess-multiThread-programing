@@ -3,8 +3,10 @@
 
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
 
 // io.c
 void stdin_info(int *H, int *W, int *N);
@@ -24,6 +26,6 @@ void free_array(void *array);
 
 // pooling.c
 void pooling(int **pooled_array, int **array, int y, int x, int N, char *type);
-void pooling_thread(int **pooled_array, int **array, int N, int W, int start, int max_width, char *type);
+void pooling_thread(int **pooled_array, int **array, int start, int y, int x, int N, char *type);
 
 #endif

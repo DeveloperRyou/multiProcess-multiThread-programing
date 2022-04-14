@@ -1,5 +1,4 @@
-#include <stdlib.h>
-#include <unistd.h>
+#include "pooling.h"
 
 int **malloc_array_2D(int H, int W)
 {

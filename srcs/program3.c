@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 				printf("[ERROR] : Thread Create Error\n");
 				exit(1);
 			}
-			processed_line += thread_argv[thread_index][1];
+			processed_line += (H/N - processed_line) / (thread_num - thread_index);
 		}
 
 		// wait for thread until finished

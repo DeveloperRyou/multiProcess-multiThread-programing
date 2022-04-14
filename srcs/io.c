@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <time.h>
+#include "pooling.h"
 
 void stdin_info(int *H, int *W, int *N)
 {

@@ -1,4 +1,3 @@
-#include <string.h>
 #include "pooling.h"
 
 int pooling_avg(int **array, int y, int x, int N)
@@ -68,7 +67,7 @@ void pooling_thread(int **pooled_array, int **array, int start, int y, int x, in
 				pooled_array[start+i][j] = pooling_min(array, start+i, j, N);
 			else if (strcmp("max", type) == 0) // max pooling
 				pooled_array[start+i][j] = pooling_max(array, start+i, j, N);
-			else // exception handing
+			else // exception handing 	
 				pooled_array[start+i][j] = 0;
 		}
 	}
