@@ -5,11 +5,6 @@ int main(int argc, char **argv)
 	// called from shell or process
 	if (argc == 2 || argc == 3)
 	{
-		// set clock after stdin
-		clock_t start, end;
-		if (argc == 2)
-			start = clock();
-		
 		/** Standard input **/
 		// input infomation from standard
 		int H, W, N;
@@ -29,6 +24,11 @@ int main(int argc, char **argv)
 		int **pooled_array;
 		pooled_array = malloc_array_2D(H/N, W/N);
 
+		// set clock after stdin
+		clock_t start, end;
+		if (argc == 2)
+			start = clock();
+		
 		// do pooling
 		pooling(pooled_array, array, H/N, W/N, N, argv[1]);
 		

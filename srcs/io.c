@@ -25,7 +25,7 @@ void stdin_array_st(int **array, int N, int W, int start, int max_width)
 
 void stdout_time(clock_t start, clock_t end)
 {
-	printf("%lld\n", end - start);
+	printf("%lld\n", 1000 * (end - start) / CLOCKS_PER_SEC);
 }
 
 void stdout_array(int **array, int H, int W)

@@ -71,6 +71,5 @@ void pooling_thread(int **pooled_array, int **array, int N, int W, int start, in
 			pooled_array[y][x] = pooling_max(array, y, x, N);
 		else // exception handing
 			pooled_array[y][x] = 0;
-		printf("%d : Processed Node %d\n", pthread_self(), i);
 	}
 }

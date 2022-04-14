@@ -10,7 +10,6 @@ static char *type;
 // thread function
 void* thread_excute(void *thread_argv)
 {
-	printf("Thread num : %d\n", pthread_self());
 	int width = ((int *)thread_argv)[0];
 	int processed_node = ((int *)thread_argv)[1];
 
@@ -22,11 +21,7 @@ int main(int argc, char **argv)
 {
 	// called from shell or process
 	if (argc == 3)
-	{		
-		// set clock
-		clock_t start, end;
-		start = clock();
-		
+	{	
 		/** Standard input **/
 		// input infomation from standard
 		stdin_info(&H, &W, &N);
@@ -63,6 +58,10 @@ int main(int argc, char **argv)
 		// set values to distribute
 		int process_node_size;
 		process_node_size = (H/N)*(W/N);
+			
+		// set clock after stdin
+		clock_t start, end;
+		start = clock();
 		
 		// make thread and send argument to thread
 		int processed_node;
@@ -94,6 +93,7 @@ int main(int argc, char **argv)
 		stdout_array(pooled_array, H/N, W/N);
 		
 		// free array
+		free_array(pthreads);
 		free_array_2D(thread_argv, thread_num);
 		free_array_2D(array, H);
 		free_array_2D(pooled_array, H/N);

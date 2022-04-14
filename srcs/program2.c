@@ -4,10 +4,6 @@ int main(int argc, char **argv)
 {
 	if (argc == 3)
 	{
-		// set clock
-		clock_t start, end;
-		start = clock();
-
 		/** Make Processes **/
 		// set process number
 		int process_num;
@@ -71,6 +67,10 @@ int main(int argc, char **argv)
 		// malloc memory to store array after pooling
 		int **pooled_array;
 		pooled_array = malloc_array_2D(H/N, W/N);
+		
+		// set clock after stdin
+		clock_t start, end;
+		start = clock();
 
 		// set values to distribute
 		int process_node_size;
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 		// save standard io
 		int temp_stdin = dup(STDIN_FILENO);
 		int temp_stdout = dup(STDOUT_FILENO);
-		
+
 		// send data to child process
 		int processed_node;
 		processed_node = 0;
