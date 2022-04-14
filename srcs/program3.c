@@ -10,11 +10,14 @@ static char *type;
 // thread function
 void* thread_excute(void *thread_argv)
 {
-	int start_idx = ((int *)thread_argv)[0];
+	int start = ((int *)thread_argv)[0];
 	int height = ((int *)thread_argv)[1];
+	if (height == 0)
+		return 0;
 
 	// do pooling in thread
-	pooling_thread(pooled_array, array, start_idx, height, W/N, N, type);
+	pooling_thread(pooled_array, array, start, height, W/N, N, type);
+	return 0;
 }
 
 int main(int argc, char **argv)
