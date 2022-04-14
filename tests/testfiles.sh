@@ -5,12 +5,12 @@ do
 	./tests/test $var $var 100 > $file
 	echo "Make "$file
 done
-# 12 files fix size
-for var in {100..20000..100}
+# 9 files fix size
+for var in {150..15000..150}
 do
-	if [ $((20000 % $var)) -eq 0 ]; then
+	if [ $((15000 % $var)) -eq 0 ]; then
 		file=./tests/test_fix_size_$(printf "%.5d" $var)
-		./tests/test 20000 20000 $var > $file
+		./tests/test 15000 15000 $var > $file
 		echo "Make "$file
 	fi
 done
