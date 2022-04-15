@@ -14,7 +14,7 @@ void stdin_array(int **array, int start, int H, int W)
 
 void stdout_time(clock_t start, clock_t end)
 {
-	printf("%lld\n", 1000 * (end - start) / CLOCKS_PER_SEC);
+	printf("%ld\n", 1000 * (end - start) / CLOCKS_PER_SEC);
 }
 
 void stdout_array(int **array, int start, int H, int W)

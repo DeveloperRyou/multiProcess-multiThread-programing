@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 				// change standard io to pipe
 				dup2(pipes_output[process_index][0], STDIN_FILENO);
 				dup2(pipes_input[process_index][1], STDOUT_FILENO);
-				execl("./program1", "./program1", argv[1], "childProcess", 0); // execute program 1
+				execl("./program1", "./program1", argv[1], "childProcess", NULL); // execute program 1
 				printf("[ERROR] : Execute Error\n");
 				exit(1);
 			}
