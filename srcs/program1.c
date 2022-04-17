@@ -35,9 +35,9 @@ int main(int argc, char **argv)
 		}
 
 		// set clock after stdin
-		clock_t start, end;
+		struct timespec st, ed;
 		if (argc == 2)
-			start = clock();
+			clock_gettime(CLOCK_MONOTONIC, &st);
 		
 		// do pooling
 		pooling(pooled_array, array, 0, H/N, W/N, N, argv[1]);
@@ -46,8 +46,8 @@ int main(int argc, char **argv)
 		// output array after pooling
 		if (argc == 2)
 		{
-			end = clock();
-			stdout_time(start, end);
+			clock_gettime(CLOCK_MONOTONIC, &ed);
+			stdout_time(st, ed);
 		}
 		stdout_array(pooled_array, 0, H/N, W/N);
 		

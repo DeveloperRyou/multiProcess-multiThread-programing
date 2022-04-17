@@ -91,8 +91,8 @@ int main(int argc, char **argv)
 		}
 		
 		// set clock after stdin
-		clock_t start, end;
-		start = clock();
+		struct timespec st, ed;
+		clock_gettime(CLOCK_MONOTONIC, &st);
 
 		// save standard io
 		int temp_stdin = dup(STDIN_FILENO);
@@ -130,8 +130,8 @@ int main(int argc, char **argv)
 		// output array after pooling
 		dup2(temp_stdin, STDIN_FILENO);
 		dup2(temp_stdout, STDOUT_FILENO);
-		end = clock();
-		stdout_time(start, end);
+		clock_gettime(CLOCK_MONOTONIC, &ed);
+		stdout_time(st, ed);
 		stdout_array(pooled_array, 0, H/N, W/N);
 
 		// close fd
