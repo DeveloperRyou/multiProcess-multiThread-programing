@@ -77,8 +77,8 @@ int main(int argc, char **argv)
 		}
 			
 		// set clock after stdin
-		clock_t start, end;
-		start = clock();
+		struct timespec st, ed;
+		clock_gettime(CLOCK_MONOTONIC, &st);
 		
 		// set type
 		type = argv[1];
@@ -110,8 +110,8 @@ int main(int argc, char **argv)
 
 		/** Standard output **/
 		// output array after pooling
-		end = clock();
-		stdout_time(start, end);
+		clock_gettime(CLOCK_MONOTONIC, &ed);
+		stdout_time(st, ed);
 		stdout_array(pooled_array, 0, H/N, W/N);
 		
 		// free array

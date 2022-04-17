@@ -13,7 +13,7 @@
 // io.c
 void stdin_info(int *H, int *W, int *N);
 void stdin_array(int **array, int start, int H, int W);
-void stdout_time(clock_t start, clock_t end);
+void stdout_time(struct timespec start, struct timespec end);
 void stdout_array(int **array, int start, int H, int W);
 void stdout_info(int H, int W, int N);
 

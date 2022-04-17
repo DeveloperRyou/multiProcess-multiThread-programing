@@ -12,9 +12,9 @@ void stdin_array(int **array, int start, int H, int W)
 			scanf("%d", &array[start+i][j]);
 }
 
-void stdout_time(clock_t start, clock_t end)
+void stdout_time(struct timespec start, struct timespec end)
 {
-	printf("%ld\n", 1000 * (end - start) / CLOCKS_PER_SEC);
+	printf("%ld\n",  (end.tv_sec - start.tv_sec) * 1000 + (end.tv_nsec - start.tv_nsec) / 1000000);
 }
 
 void stdout_array(int **array, int start, int H, int W)
