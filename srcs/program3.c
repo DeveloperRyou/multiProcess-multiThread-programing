@@ -55,6 +55,8 @@ int main(int argc, char **argv)
 		thread_num = atoi(argv[2]);
 		if (thread_num <= 0)
 			return 0;
+		if (thread_num > MAX_THREAD)
+			thread_num = MAX_THREAD;
 
 		// set thread array
 		pthread_t *pthreads;

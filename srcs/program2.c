@@ -1,5 +1,4 @@
 #include "pooling.h"
-#define MAX_PROCESS 200
 
 int main(int argc, char **argv)
 {

@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#define MAX_THREAD 200
+#define MAX_PROCESS 200
 
 // io.c
 void stdin_info(int *H, int *W, int *N);
