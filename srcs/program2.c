@@ -1,4 +1,5 @@
 #include "pooling.h"
+#define MAX_PROCESS 200
 
 int main(int argc, char **argv)
 {
@@ -10,6 +11,8 @@ int main(int argc, char **argv)
 		process_num = atoi(argv[2]);
 		if (process_num <= 0)
 			return 0;
+		if (process_num > MAX_PROCESS)
+			process_num = MAX_PROCESS;
 
 		// set process array
 		pid_t *pids;
